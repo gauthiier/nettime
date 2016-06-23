@@ -1,0 +1,8 @@
+Usage: archive_nettime.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -u URL, --url=URL     nettime url
+  -l LIST, --list=LIST  nettime's list name (ex: nettime-l)
+
+ Dependencies: bs4
