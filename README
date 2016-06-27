@@ -7,3 +7,5 @@ Options:
   -a ARCH, --arch=ARCH  path to archive directory
 
  Dependencies: bs4
+
+ Inspired by http://sbenthall.github.io/bigbang/
