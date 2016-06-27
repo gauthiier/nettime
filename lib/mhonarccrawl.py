@@ -9,7 +9,7 @@ from pprint import pprint as pp
 import sys, os, re, json, gzip
 import traceback
 
-DELAY = 0.5
+DELAY = 0.2
 
 # hack for the mailbox module (re: force mbox.add() encoding to utf8)
 reload(sys) 
@@ -99,8 +99,18 @@ def collect_threads_from_url(url, base_arch_dir, mbox):
         for l in lists:
             n += 1
             logging.info("> " + str(n) + " / " + nbr_threads)
-            thread = archive_thread(l, base_url, None)
-            threads['threads'].append(thread)
+
+            try:
+                thread = archive_thread(l, base_url, None)
+                threads['threads'].append(thread)
+            except:
+                ex_type, ex, tb = sys.exc_info()
+                print ex_type
+                print ex
+                traceback.print_tb(tb)
+                del tb                
+                continue
+
             time.sleep(DELAY)
 
         # write 
