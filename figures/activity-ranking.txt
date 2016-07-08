@@ -1,0 +1,47 @@
+
+> total nbr. posts
+
+from				   posts
+
+geert{at}xs4all.nl                 883
+patrice{at}xs4all.nl               710
+tbyfield{at}panix.com              444
+sondheim{at}panix.com              388
+morlockelloi{at}yahoo.com          260
+jya{at}pipeline.com                242
+bhcontinentaldrift{at}gmail.com    213
+bruces{at}well.com                 199
+brian.holmes{at}wanadoo.fr         190
+jaromil{at}dyne.org                180
+
+--
+
+> total nbr. replies
+
+from				 replies
+
+geert{at}xs4all.nl                 483
+patrice{at}xs4all.nl               306
+bhcontinentaldrift{at}gmail.com    223
+felix{at}openflows.com             170
+brian.holmes{at}wanadoo.fr         145
+jaromil{at}dyne.org                128
+tbyfield{at}panix.com              125
+jya{at}pipeline.com                108
+dk{at}telekommunisten.net          104
+newmedia{at}aol.c                  102
+
+------------
+
+from  nbr-references                                                                  subject                                                              url
+date                                                                                                                                                                                                          
+2015-04-01 07:35:14              nettime{at}kein.org              48                                     <nettime> nottime: the end of nettim  https://nettime.org/Lists-Archives/nettime-l-1504/msg00001.html
+2014-05-11 15:57:28               geert{at}xs4all.nl              35                            <nettime> tensions within the bay area elites  https://nettime.org/Lists-Archives/nettime-l-1405/msg00018.html
+2011-05-13 06:52:45             nak44{at}cornell.edu              34                                                 <nettime> ISEA 2011 fees  https://nettime.org/Lists-Archives/nettime-l-1105/msg00055.html
+2003-10-01 06:36:04                  sdela{at}ahk.nl              29                            Re: <nettime> A Puff Piece on Wikipedia (Fwd)  https://nettime.org/Lists-Archives/nettime-l-0310/msg00002.html
+2006-06-06 19:51:17              tobias{at}techno.ca              29                                                  <nettime> report_on_NNA  https://nettime.org/Lists-Archives/nettime-l-0606/msg00006.html
+2016-02-12 21:33:21               geert{at}xs4all.nl              27                                   <nettime> notes from the DIEM25 launch  https://nettime.org/Lists-Archives/nettime-l-1602/msg00014.html
+2012-08-27 13:21:03              nettime{at}kein.org              26                                        <nettime> crowd-funding on nettim  https://nettime.org/Lists-Archives/nettime-l-1208/msg00023.html
+2012-05-03 08:43:01  bhcontinentaldrift{at}gmail.com              25              <nettime> The insult of the 1 percent: "Art-history majors"  https://nettime.org/Lists-Archives/nettime-l-1205/msg00004.html
+2007-11-06 09:17:29              davidg{at}xs4all.nl              23                                              <nettime> Goodbye Classic ?  https://nettime.org/Lists-Archives/nettime-l-0711/msg00011.html
+2009-05-11 21:29:14               geert{at}xs4all.nl              23  <nettime> Political Work in the Aftermath of the New Media Arts\tCrisis  https://nettime.org/Lists-Archives/nettime-l-0905/msg00038.html

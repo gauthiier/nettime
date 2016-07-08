@@ -1,0 +1,31 @@
+body {
+	background-color: rgb(255, 255, 255);
+}
+
+#ffframe {
+	padding: 3em;
+}
+
+text {
+	display: block;
+	width: 40em;
+	text-align: left;
+}
+
+img {
+	width: 40em;
+}
+
+li
+{
+	padding: 0.3em;
+}
+
+fff img {
+		width: 40em;
+		margin-bottom: 20em;
+}
+
+
+
+
