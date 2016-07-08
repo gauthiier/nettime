@@ -193,6 +193,7 @@ class Archive:
 		try:
 			sum_activity_month = self.activity.sum(axis=1)
 			if resolution.lower() == 'm':
+				sum_activity_month.rename
 				return sum_activity_month
 			elif resolution.lower() == 'y':
 				y = sum_activity_month.resample('AS').sum()
@@ -303,15 +304,100 @@ class Archive:
 	threads
 	'''			
 
-	def _threads(self):
+	def _threads(self, thresh=0):
 
 		if self.threads is None:
-			self.threads = self.dataframe[self.dataframe['nbr-references'] > 0].reindex(columns=['from','nbr-references','subject', 'url', 'message-id']).sort_values('nbr-references', ascending=False)
+			self.threads = self.dataframe[self.dataframe['nbr-references'] > thresh].reindex(columns=['from','nbr-references','subject', 'url', 'message-id']).sort_values('nbr-references', ascending=False)
 		return self.threads;
 
 	def threads_ranking(self, rank=5):
 
 		self._threads()
 		return self.threads.drop('message-id', axis=1)[:rank]
+
+	def threads_from(self, email_address, resolution='y'):
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None
+
+		self._threads()
+
+		eaddr = email_address.replace('@', '{at}').lower()
+
+		self._threads()
+		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
+		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq=freq), 'from']).sum()
+		threads_from_ranking = threads_from_ranking.reset_index().pivot(columns='from', index='date', values='nbr-references').fillna(0)
+		return threads_from_ranking[eaddr]
+
+	def threads_from_ranking(self, rank=5, filter_nettime=True):
+
+		self._threads()
+		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
+		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq='AS'), 'from']).sum()
+		threads_from_ranking = threads_from_ranking.reset_index().pivot(columns='from', index='date', values='nbr-references').fillna(0)
+		tfr = threads_from_ranking.sum(axis=0).order(ascending=False)
+
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			tfr = tfr[tfr.index.str.contains(p)]
+
+		return tfr[:rank]
+
+	def plot_threads_from_ranking(self, resolution='y', rank=5, figsize=(8, 7)):
+
+		threads_rank = self.threads_from_ranking(rank=rank).keys()
+		series = []
+		for k in threads_rank:
+			series.append(self.threads_from(k, resolution))
+			
+		df = pd.concat(series, axis=1)
+		
+		colors = np.random.rand(len(df),3)
+
+		if figsize:
+			df.plot(colors=colors, figsize=figsize)
+		else:
+			df.plot(colors=colors)
+
+
+	def threads_overall(self, resolution='y', aggregate='sum', tresh=0):
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None
+
+		agg = aggregate.lower()
+		if not agg in ['sum', 'mean']:
+			return None
+
+		if not self.threads is None:
+			del self.threads
+			self.threads = None
+
+		self._threads(tresh)
+
+		if agg == 'sum':
+			y = self.threads.groupby([pd.TimeGrouper(freq=freq)]).sum()
+		else:
+			y = self.threads.groupby([pd.TimeGrouper(freq=freq)]).mean()
+
+		if freq == 'AS':
+			y.index = y.index.year
+
+		return y
+
+
+
+
 
 
