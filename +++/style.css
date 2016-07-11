@@ -26,6 +26,17 @@ fff img {
 		margin-bottom: 20em;
 }
 
+table {
+	width: 100%;
+}
+
+table .table_subject {
+	text-align: right;
+}
+
+table .table_number {
+	text-align: center;
+}
 
 
 
