@@ -1,6 +1,6 @@
 import sys, logging
 from optparse import OptionParser
-import lib.nettime as nettime
+import nettime.archiver as nettime
 
 logging.basicConfig(level=logging.DEBUG)
 
