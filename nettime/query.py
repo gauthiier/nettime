@@ -30,7 +30,7 @@ class Query:
 
 		return self.activity
 
-	def activity_from(self, email_address, resolution='M'):
+	def activity_from(self, email_address, resolution='y'):
 
 		eaddr = email_address.replace('@', '{at}').lower()
 
@@ -47,7 +47,7 @@ class Query:
 		except KeyError:
 			return None
 
-	def activity_overall(self, resolution='M'):
+	def activity_overall(self, resolution='y'):
 
 		self._activity()
 		try:
@@ -64,7 +64,7 @@ class Query:
 		except:
 			return None
 
-	def activity_from_ranking(self, resolution='M', rank=5, filter_nettime=True):
+	def activity_from_ranking(self, resolution='y', rank=5, filter_nettime=True):
 		# finish this -- re resolution AND filtering
 		self._activity()
 		afr = self.activity.sum(axis=0).order(ascending=False)
@@ -103,7 +103,7 @@ class Query:
 
 		return self.content_length
 
-	def content_length_from(self, email_address, resolution='M'):
+	def content_length_from(self, email_address, resolution='y'):
 
 		eaddr = email_address.replace('@', '{at}').lower()
 
@@ -136,7 +136,7 @@ class Query:
 		except:
 			return None
 
-	def content_length_from_ranking(self, resolution='M', rank=5, filter_nettime=True):
+	def content_length_from_ranking(self, resolution='y', rank=5, filter_nettime=True):
 		# finish this -- re resolution
 		self._content_length()
 		cfr = self.content_length.sum(axis=0).order(ascending=False)
