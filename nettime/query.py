@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import archive
-import logging, html
+import logging
 
 class Query:
 
@@ -30,65 +30,78 @@ class Query:
 
 		return self.activity
 
-	def activity_from(self, email_address, resolution='y'):
+	def activity_from(self, email_address, resolution='y', series=False):
 
 		eaddr = email_address.replace('@', '{at}').lower()
 
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None		
+
 		self._activity()
 		try:
-			if resolution.lower() == 'm':
-				return self.activity[eaddr]
-			elif resolution.lower() == 'y':
-				y = self.activity[eaddr].resample('AS').sum()
-				y.index = y.index.year
-				return y
-			else:
-				return None
+			af = self.activity[eaddr]			
 		except KeyError:
 			return None
 
-	def activity_overall(self, resolution='y'):
+		activity_from = af.groupby([pd.TimeGrouper(freq=freq)]).sum()
 
-		self._activity()
-		try:
-			sum_activity_month = self.activity.sum(axis=1)
-			if resolution.lower() == 'm':
-				sum_activity_month.rename
-				return sum_activity_month
-			elif resolution.lower() == 'y':
-				y = sum_activity_month.resample('AS').sum()
-				y.index = y.index.year
-				return y
-			else:
-				return None
-		except:
-			return None
+		if freq == 'AS':
+			activity_from.index = activity_from.index.format(formatter=lambda x: x.strftime('%Y'))
+			activity_from.index.name = 'year'
+		else:
+			activity_from.index = activity_from.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			activity_from.index.name = 'year-month'
 
-	def activity_from_ranking(self, resolution='y', rank=5, filter_nettime=True):
-		# finish this -- re resolution AND filtering
+		if series:
+			return activity_from
+
+		return activity_from.to_frame('nbr-messages').astype(int)
+
+	def activity_from_ranking(self, rank=5, filter_nettime=True, series=False):
+		
 		self._activity()
 		afr = self.activity.sum(axis=0).order(ascending=False)
 		if filter_nettime:
 			p = r'^((?!nettime*).)*$'
 			afr = afr[afr.index.str.contains(p)]
-		return afr[:rank]
 
-	def plot_activity_from_ranking(self, resolution='y', rank=5, figsize=(8, 7)):
+		if series:
+			return afr[:rank]
 
-		activity_rank = self.activity_from_ranking(rank=rank).keys()
-		series = []
-		for k in activity_rank:
-			series.append(self.activity_from(k, resolution))
-			
-		df = pd.concat(series, axis=1)
-		
-		colors = np.random.rand(len(df),3)
+		return afr[:rank].to_frame('nbr-messages').astype(int)	
 
-		if figsize:
-			df.plot(colors=colors, figsize=figsize)
+
+	def activity_overall(self, resolution='y', series=False):
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
 		else:
-			df.plot(colors=colors)	
+			return None
 
+		self._activity()
+
+		y = self.activity.sum(axis=1)
+		y = y.groupby([pd.TimeGrouper(freq=freq)]).sum()
+
+		if freq == 'AS':
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y'))
+			y.index.name = 'year'
+		else:
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			y.index.name = 'year-month'
+
+		if series:
+			return y
+
+		return y.to_frame('nbr-messages').astype(int)
 
 	'''
 	content lenght
@@ -103,63 +116,78 @@ class Query:
 
 		return self.content_length
 
-	def content_length_from(self, email_address, resolution='y'):
+	def content_length_from(self, email_address, resolution='y', series=False):
 
 		eaddr = email_address.replace('@', '{at}').lower()
 
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None		
+
 		self._content_length()
 		try:
-			if resolution.lower() == 'm':
-				return self.content_length[eaddr]
-			elif resolution.lower() == 'y':
-				y = self.content_length[eaddr].resample('AS').sum()
-				y.index = y.index.year
-				return y
-			else:
-				return None
+			af = self.content_length[eaddr]			
 		except KeyError:
 			return None
 
-	def content_length_overall(self):
+		content_length_from = af.groupby([pd.TimeGrouper(freq=freq)]).sum()
 
-		self._content_length()
-		try:
-			sum_content_length_month = self.content_length.sum(axis=1)
-			if resolution.lower() == 'm':
-				return sum_content_length_month
-			elif resolution.lower() == 'y':
-				y = sum_content_length_month.resample('AS').sum()
-				y.index = y.index.year
-				return y
-			else:
-				return None
-		except:
-			return None
+		if freq == 'AS':
+			content_length_from.index = content_length_from.index.format(formatter=lambda x: x.strftime('%Y'))
+			content_length_from.index.name = 'year'
+		else:
+			content_length_from.index = content_length_from.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			content_length_from.index.name = 'year-month'
 
-	def content_length_from_ranking(self, resolution='y', rank=5, filter_nettime=True):
-		# finish this -- re resolution
+		if series:
+			return content_length_from
+
+		return content_length_from.to_frame('nbr-bytes').astype(int)
+
+	def content_length_from_ranking(self, resolution='y', rank=5, filter_nettime=True, series=False):
+		
 		self._content_length()
 		cfr = self.content_length.sum(axis=0).order(ascending=False)
 		if filter_nettime:
 			p = r'^((?!nettime*).)*$'
 			cfr = cfr[cfr.index.str.contains(p)]
-		return cfr[:rank]
 
-	def plot_content_length_from_ranking(self, resolution='y', rank=5, figsize=(8, 7)):
+		if series:
+			return cfr[:rank]
 
-		content_rank = self.content_length_from_ranking(rank=rank).keys()
-		series = []
-		for k in content_rank:
-			series.append(self.content_length_from(k, resolution))
-			
-		df = pd.concat(series, axis=1)
-		
-		colors = np.random.rand(len(df),3)
+		return cfr[:rank].to_frame('nbr-bytes').astype(int)
 
-		if figsize:
-			df.plot(colors=colors, figsize=figsize)
+	def content_length_overall(self, resolution='y', series=False):
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
 		else:
-			df.plot(colors=colors)
+			return None
+
+		self._content_length()
+
+		y = self.content_length.sum(axis=1)
+		y = y.groupby([pd.TimeGrouper(freq=freq)]).sum()
+
+		if freq == 'AS':
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y'))
+			y.index.name = 'year'
+		else:
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			y.index.name = 'year-month'
+
+		if series:
+			return y
+
+		return y.to_frame('nbr-bytes').astype(int)
+
 
 	'''
 	threads
@@ -171,37 +199,39 @@ class Query:
 			self.threads = self.netarchive.dataframe[self.netarchive.dataframe['nbr-references'] > thresh].reindex(columns=['from','nbr-references','subject', 'url', 'message-id']).sort_values('nbr-references', ascending=False)
 		return self.threads;
 
-	def threads_ranking(self, rank=5, output=None):
+	def threads_ranking(self, rank=5, resolution=None):
 
 		self._threads()
-		data = self.threads.drop('message-id', axis=1)[:rank]
-		data['date'] = data.index
-		if output is None:
-			return data
-		elif output == 'string':
-			return data.to_string()
-		elif output == 'html':
-			h = html.HTML()
-			t = h.table()
 
-			r = t.tr
-			r.td('date', klass='td_date_t')
-			r.td('from', klass='td_from_t')
-			r.td('replies', klass='td_rep_t')
-			r.td('subject', klass='td_subject_t')
+		if resolution == None:
+			data = self.threads.drop('message-id', axis=1)[:rank]
+			return data.reindex_axis(['subject', 'from', 'nbr-references', 'url'], axis=1)
 
-			for i, row in data.iterrows():
-				r = t.tr
-				r.td(str(row['date']), klass='td_date')
-				r.td(row['from'], klass='td_from')
-				r.td(str(row['nbr-references']), klass='td_rep')
-				r.td('', klass='td_subject').text(str(h.a(row['subject'], href=row['url'])), escape=False)
-
-			return str(t)
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
 		else:
 			return None
 
-	def threads_from(self, email_address, resolution='y'):
+		# get the threads ranking per time resolution
+		# 
+		data = self.threads.drop('message-id', axis=1)
+		data = data.groupby([pd.TimeGrouper(freq=freq)])
+		r = {}
+		for k, v in data:
+			if freq == 'AS':
+				time_key = k.strftime('%Y')
+			else:
+				time_key = k.strftime('%Y-%m')
+			frame = v[:rank]
+			frame = frame.reindex_axis(['subject', 'from', 'nbr-references', 'url'], axis=1)
+			r[time_key] = frame
+		return r
+
+
+	def threads_from(self, email_address, resolution='y', series=False):
 
 		freq = 'M'
 		if resolution.lower() == 'y':
@@ -219,9 +249,22 @@ class Query:
 		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
 		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq=freq), 'from']).sum()
 		threads_from_ranking = threads_from_ranking.reset_index().pivot(columns='from', index='date', values='nbr-references').fillna(0)
-		return threads_from_ranking[eaddr]
 
-	def threads_from_ranking(self, rank=5, filter_nettime=True):
+		if series:
+			return threads_from_ranking[eaddr]
+
+		threads_from_ranking = threads_from_ranking[eaddr].to_frame('nbr-threads').astype(int)
+
+		if freq == 'AS':
+			threads_from_ranking.index = threads_from_ranking.index.format(formatter=lambda x: x.strftime('%Y'))
+			threads_from_ranking.index.name = 'year'
+		else:
+			threads_from_ranking.index = threads_from_ranking.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			threads_from_ranking.index.name = 'year-month'
+
+		return threads_from_ranking
+
+	def threads_from_ranking(self, rank=5, filter_nettime=True, series=False):
 
 		self._threads()
 		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
@@ -233,24 +276,11 @@ class Query:
 			p = r'^((?!nettime*).)*$'
 			tfr = tfr[tfr.index.str.contains(p)]
 
-		return tfr[:rank]
+		if series:
+			return tfr[:rank]
 
-	def plot_threads_from_ranking(self, resolution='y', rank=5, figsize=(8, 7)):
-
-		threads_rank = self.threads_from_ranking(rank=rank).keys()
-		series = []
-		for k in threads_rank:
-			series.append(self.threads_from(k, resolution))
-			
-		df = pd.concat(series, axis=1)
-		
-		colors = np.random.rand(len(df),3)
-
-		if figsize:
-			df.plot(colors=colors, figsize=figsize)
-		else:
-			df.plot(colors=colors)
-
+		tfr = tfr[:rank].to_frame('nbr-threads').astype(int)
+		return tfr
 
 	def threads_overall(self, resolution='y', aggregate='sum', tresh=0):
 
@@ -263,7 +293,7 @@ class Query:
 			return None
 
 		agg = aggregate.lower()
-		if not agg in ['sum', 'mean']:
+		if not agg in ['sum', 'mean', 'count']:
 			return None
 
 		if not self.threads is None:
@@ -273,11 +303,20 @@ class Query:
 		self._threads(tresh)
 
 		if agg == 'sum':
+			# number of replies total (re: sum all the replies)
 			y = self.threads.groupby([pd.TimeGrouper(freq=freq)]).sum()
-		else:
+		elif agg == 'mean':
 			y = self.threads.groupby([pd.TimeGrouper(freq=freq)]).mean()
+		else:
+			# number of threads (re: msgs with at least one reply)
+			y = self.threads['nbr-references'].groupby([pd.TimeGrouper(freq=freq)]).count()
+			y = y.to_frame('nbr-threads')
 
 		if freq == 'AS':
-			y.index = y.index.year
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y'))
+			y.index.name = 'year'
+		else:
+			y.index = y.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			y.index.name = 'year-month'
 
-		return y			
+		return y	
