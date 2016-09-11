@@ -12,6 +12,10 @@ import query
 def bar_plot_series(series, title, color='blueviolet'):
 	return series.plot(kind = 'bar', title=title, color=color, alpha=0.8, stacked=True)
 
+def save(plot, name):
+	fig = plot.get_figure()
+	fig.savefig(name)
+
 class Plot:
 
 	query = None

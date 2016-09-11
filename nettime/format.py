@@ -1,5 +1,5 @@
 import query
-import logging, html
+import logging, html, numpy
 from tabulate import tabulate
 
 class Html:
@@ -14,8 +14,10 @@ class Html:
 
 		self.query = q
 
-	def threads_ranking(self, rank=5):
+	def threads_ranking(self, rank=5, resolution=None):
 
+		#if resolution is None:
+		
 		data = self.query.threads_ranking(rank=rank)
 
 		h = html.HTML()
@@ -36,7 +38,8 @@ class Html:
 
 		return str(t)
 
-	def from_dataframe(self, data_frame, table_name=None, name_map={}):
+	@staticmethod
+	def from_dataframe(data_frame, table_name=None, name_map={}, url_map={}):
 
 		header = []
 		header.append(data_frame.index.name)
@@ -57,6 +60,17 @@ class Html:
 		else:
 			t = h.table()
 
+		# url map
+		url_hash = {}
+		url_skip = []
+		url_keys = url_map.keys()
+		for u in url_keys:
+			 if u in header and url_map[u] in header:
+			 	url_indx = header.index(url_map[u])
+			 	url_hash[header.index(u)] = url_indx
+			 	url_skip.append(url_indx)
+			 	header.pop(url_indx)
+
 		#header
 		r = t.tr
 		n = 0
@@ -64,30 +78,36 @@ class Html:
 			r.td(str(j), klass=css_header[n])
 			n += 1
 
+		
 		#elements		
 		for k, row in data_frame.iterrows():
 			r = t.tr
 			r.td(str(k), klass=css_element[0])
 			n = 1
 			for l in row:
-				r.td(str(l), klass=css_element[n])
+
+				if n in url_skip:
+					continue
+
+				if type(l) == numpy.float64:
+					l = '{0:.4f}'.format(l)
+
+				if n in url_hash.keys():
+					url = row[url_hash[n] - 1]
+					print '---->' + l
+					print '<<<<<>' + url
+					r.td('', klass=css_element[n]).text(str(h.a(str(l), href=url)), escape=False)
+
+				else:
+					r.td(str(l), klass=css_element[n])
 				n += 1
 
 		return str(t)
 
 class Tab:
 
-	query = None
-
-	def __init__(self, q=None):
-
-		if not isinstance(q, query.Query):
-			logging.error("HtmlFormat constructor Error: query must be of type nettime.query.Query")
-			raise Exception()
-
-		self.query = q
-
-	def from_dataframe(self, data_frame, name_map={}):
+	@staticmethod
+	def from_dataframe(data_frame, name_map={}):
 
 		header = []
 		header.append(data_frame.index.name)
@@ -96,6 +116,6 @@ class Tab:
 				h = name_map[h]
 			header.append(h)
 
-		return tabulate(data_frame, headers=header)
+		return tabulate(data_frame, headers=header, floatfmt=".4f")
 
 
