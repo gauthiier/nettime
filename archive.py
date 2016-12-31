@@ -20,9 +20,9 @@ def run(options):
 if __name__ == "__main__":
 
     p = OptionParser();
-    p.add_option('-u', '--url', action="store", help="nettime url", default="http://www.nettime.org/archives.php")
-    p.add_option('-l', '--list', action="store", help="nettime's list name (ex: nettime-l)", default="nettime-l")
-    p.add_option('-a', '--arch', action="store", help="path to archive directory", default="archives")
+    p.add_option('-u', '--url', action="store", help="nettime url (default='http://www.nettime.org/archives.php')", default="http://www.nettime.org/archives.php")
+    p.add_option('-l', '--list', action="store", help="nettime's list name (default=nettime-l)", default="nettime-l")
+    p.add_option('-a', '--arch', action="store", help="path to archives directory (default='archives')", default="archives")
 
     options, args = p.parse_args()
 
