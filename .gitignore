@@ -1,8 +1,8 @@
-# Byte-compiled / optimized / DLL files
+# python byte-compiled / optimized
 __pycache__/
 *.py[cod]
 *$py.class
 
+# local work dirs
 archives
-
-setenv*
+setenv
