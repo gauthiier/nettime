@@ -1,182 +1,103 @@
+import sys, os, json, logging
+from optparse import OptionParser
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+logging.info('1/4 setting up matplotlib')
+# matplot view/windows
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.interactive(True)
+
+logging.info('2/4 setting up pandas')
+# pd display
+import pandas as pd
+pd.set_option('display.max_colwidth', 100)
+
+logging.info('3/4 loading nettime archive')
+import nettime.archive
 import nettime.query
-import nettime.format
-import nettime.plot
+import nettime.report
 
-class Report:
+a = nettime.archive.Archive('nettime-l_2016-12-31.json.gz')
+q = nettime.query.Query(a)
+r = nettime.report.Report(q)
 
-	query = None
-	matrix = None
+logging.info('4/4 reporting')
 
-	def __init__(self, q=None):
+def text(command, params=None):
 
-		if not isinstance(q, nettime.query.Query):
-			logging.error("HtmlFormat constructor Error: query must be of type nettime.query.Query")
-			raise Exception()
+	print command
 
-		self.query = q
+	func = {
+		"tab_msgs_threads_replies": r.tab_msgs_threads_replies,
+		"tab_avg_rep_msg_thrd": r.tab_avg_rep_msg_thrd,
+		"tab_activity_from_ranking": r.tab_activity_from_ranking,
+		"tab_content_length_from_ranking": r.tab_content_length_from_ranking,
+		"tab_threads_ranking": r.tab_threads_ranking,
+		"tab_threads_ranking_year": r.tab_threads_ranking_year
+	}
 
-	'''
-	(basic) stats
-	'''
+	print func[command]
 
-	def matrix_msgs_threads(self):
+	return func[command]()
 
-		if self.matrix is None:
+def html(command, params=None):
 
-			# nbr messages
-			mat = self.query.activity_overall()
+	func = {
+		"html_msgs_threads_replies": r.html_msgs_threads_replies,
+		"html_avg_rep_msg_thrd": r.html_avg_rep_msg_thrd,
+		"html_activity_from_ranking": r.html_activity_from_ranking,
+		"html_content_length_from_ranking": r.html_content_length_from_ranking,
+		"html_threads_ranking": r.html_threads_ranking,
+		"html_threads_ranking_year": r.html_threads_ranking_year
+	}
 
-			# nbr threads
-			mat['nbr-threads'] = self.query.threads_overall(aggregate='count')['nbr-threads']
+	return func[command]()
 
-			# nbr replies
-			mat['nbr-replies'] = self.query.threads_overall(aggregate='sum')['nbr-references']
+def run(options):
 
-			# nbr non-replies (aka. non-threads)
-			mat['nbr-single-messages'] = mat['nbr-messages'] - mat['nbr-replies'] - mat['nbr-threads']
+	if options.output_file and os.path.isfile(options.output_file):
+		with open(options.output_file, 'r') as fp:
+			out = fp.read()				# not optimal but will do
+	else:
+		print 'No output-file. Nothing to do.'
+		return
 
-			# avg. rep per message
-			mat['avg--per-msg'] = mat['nbr-threads'] / mat['nbr-messages']
+	if options.input_script and os.path.isfile(options.input_script):
+		with open(options.input_script, 'r') as fp:
+			input_script = json.load(fp)
+	else:
+		print 'No input-script. Nothing to do.'
+		return
 
-			# avg. rep per thread
-			mat['avg-rep-per-thrd'] = mat['nbr-replies'] / mat['nbr-threads']	
-			# same as:
-			# mat['avg-rep-per-thrd'] = q.threads_overall(aggregate='mean')['nbr-references']
+	for cmd in input_script:
 
-			self.matrix = mat
+		if cmd['format'] == 'html':
+			func = html
+		elif cmd['format'] == 'text':
+			func = text
+		else:
+			continue
 
-		return self.matrix
+		res = func(cmd['command'])
 
-	'''
-	plots
-	'''
+		if res is not None: 			
+			out = out.replace(cmd['replace'], res)
 
-	def plot_nbr_msgs(self, title='Nbr. Messages', label='messages', color='mediumblue'):
+	with open(options.output_file, 'w') as fp:
+		fp.write(out)				# not optimal but will do
 
-		self.matrix_msgs_threads()
 
-		return nettime.plot.bar_plot_series(self.matrix['nbr-messages'].to_frame(label), title=title, color=color)
+if __name__ == "__main__":
 
-	def plot_nbr_threads(self, title='Nbr. Threads', label='threads', color='crimson'):
+    p = OptionParser();
+    p.add_option('-i', '--input-script', action="store", help="..")
+    p.add_option('-o', '--output-file', action="store", help="..")
 
-		self.matrix_msgs_threads()
+    options, args = p.parse_args()
 
-		return nettime.plot.bar_plot_series(self.matrix['nbr-threads'].to_frame(label), title=title, color=color)
-
-	def plot_nbr_replies(self, title='Nbr. Replies in Threads', label='replies', color='dimgray'):
-
-		self.matrix_msgs_threads()
-
-		return nettime.plot.bar_plot_series(self.matrix['nbr-replies'].to_frame(label), title=title, color=color)
-
-	def plot_avg_rep_p_msg(self, title='Avg. Thread per Message', label='replies-per-messasges', color='limegreen'):
-
-		self.matrix_msgs_threads()
-
-		return nettime.plot.bar_plot_series(self.matrix['avg--per-msg'].to_frame(label), title=title, color=color)
-
-	def plot_avg_rep_p_thrd(self, title='Avg. Replies per Thread', label='replies-per-thread', color='blueviolet'):
-
-		self.matrix_msgs_threads()
-
-		return nettime.plot.bar_plot_series(self.matrix['avg-rep-per-thrd'].to_frame(label), title=title, color=color)
-
-	def plot_msgs_replies(self, title='Nbr. Messages segments (individual messages vs thread replies)'):
-
-		self.matrix_msgs_threads()
-
-		return nettime.plot.bar_plot_series(self.matrix[['nbr-single-messages', 'nbr-threads', 'nbr-replies']], color=['mediumblue', 'red', 'dimgray'], title=title)
-
-	'''
-	text (tabular)
-	'''
-
-	def tab_msgs_threads_replies(self):
-		self.matrix_msgs_threads()
-		return nettime.format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']], 
-			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads'})
-
-	def tab_avg_rep_msg_thrd(self):
-		self.matrix_msgs_threads()
-		return nettime.format.Tab.from_dataframe(self.matrix[['avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
-
-	def tab_activity_from_ranking(self, rank=5):
-		d = self.query.activity_from_ranking(rank=rank)
-		return nettime.format.Tab.from_dataframe(d, name_map={'nbr-messages': 'messages'})
-
-	def tab_content_length_from_ranking(self, rank=5):
-		d = self.query.activity_from_ranking(rank=rank)
-		return nettime.format.Tab.from_dataframe(d, name_map={'nbr-bytes': 'bytes'})
-
-	def tab_threads_ranking(self, rank=5):
-		d = self.query.threads_ranking(rank=rank)
-		return nettime.format.Tab.from_dataframe(d, name_map={'nbr-references': 'nbr. replies'})
-
-	def tab_threads_ranking_year(self, rank=5, resolution='y'):
-		d = self.query.threads_ranking(rank=rank, resolution=resolution)
-		years = sorted(d)
-		nl = '\n'
-		s = ""
-		for i in years:
-			s += 'year: ' + i + nl
-			s += nettime.format.Tab.from_dataframe(d[i], name_map={'nbr-references': 'nbr. replies'}) + nl
-		return s + nl
-
-	'''
-	html
-	'''
-
-	def html_msgs_threads_replies(self):
-		self.matrix_msgs_threads()
-		return nettime.format.Html.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']], 
-			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads'})
-
-	def html_avg_rep_msg_thrd(self):
-		self.matrix_msgs_threads()
-		return nettime.format.Html.from_dataframe(self.matrix[['avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
-
-	def html_activity_from_ranking(self, rank=5):
-		html = nettime.format.Html(self.query)
-		return html.threads_ranking(rank=rank)
-
-	def html_content_length_from_ranking(self, rank=5):
-		d = self.query.activity_from_ranking(rank=rank)
-		return nettime.format.Html.from_dataframe(d, name_map={'nbr-bytes': 'bytes'})
-
-	def html_threads_ranking(self, rank=5):
-		d = self.query.threads_ranking(rank=rank)
-		return nettime.format.Html.from_dataframe(d, name_map={'nbr-references': 'nbr. replies'}, url_map={'subject': 'url'})
-
-	def html_threads_ranking_year(self, rank=5, resolution='y'):
-		d = self.query.threads_ranking(rank=rank, resolution=resolution)
-		years = sorted(d)
-		nl = '\n'
-		s = ""
-		for i in years:
-			s += '<div class="year_t">' + i + '</div>' + nl
-			s += nettime.format.Html.from_dataframe(d[i], name_map={'nbr-references': 'nbr. replies'}, url_map={'subject': 'url'}) + nl
-		return s + nl
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    run(options)
 
 

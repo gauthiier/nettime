@@ -248,5 +248,3 @@ def write_mbox_message(msg, mbox):
         for f in msg['follow-up']:
             write_mbox_message(f, mbox)
 
-
-

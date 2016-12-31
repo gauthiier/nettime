@@ -1,9 +1,14 @@
-Usage: archive_nettime.py [options]
+Usage: archive.py [options]
 
 Options:
   -h, --help            show this help message and exit
   -u URL, --url=URL     nettime url
-  -l LIST, --list=LIST  nettime's list name (ex: nettime-l)
-  -a ARCH, --arch=ARCH  path to archive directory
+                        (default='http://www.nettime.org/archives.php')
+  -l LIST, --list=LIST  nettime's list name (default=nettime-l)
+  -a ARCH, --arch=ARCH  path to archives directory (default='archives')
 
  Dependencies: bs4
+
+ ---
+
+ 
