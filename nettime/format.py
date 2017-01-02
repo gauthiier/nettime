@@ -15,10 +15,10 @@ class Html:
 		self.query = q
 
 	def threads_ranking(self, rank=5, resolution=None):
-
-		#if resolution is None:
 		
 		data = self.query.threads_ranking(rank=rank)
+
+		print data
 
 		h = html.HTML()
 		t = h.table()
@@ -31,6 +31,9 @@ class Html:
 
 		for i, row in data.iterrows():
 			r = t.tr
+
+			print row.index
+
 			r.td(str(row['date']), klass='td_date')
 			r.td(row['from'], klass='td_from')
 			r.td(str(row['nbr-references']), klass='td_rep')
@@ -89,13 +92,14 @@ class Html:
 				if n in url_skip:
 					continue
 
-				if type(l) == numpy.float64:
-					l = '{0:.4f}'.format(l)
+				if isinstance(l, float): 
+					if l % 1 > 0:
+						l = '{0:.4f}'.format(l)
+					else:
+						l = int(l)
 
 				if n in url_hash.keys():
 					url = row[url_hash[n] - 1]
-					print '---->' + l
-					print '<<<<<>' + url
 					r.td('', klass=css_element[n]).text(str(h.a(str(l), href=url)), escape=False)
 
 				else:

@@ -9,6 +9,7 @@ class Query:
 	activity = None			# (very) sparse dataframe (index=date(month), columns=from, values=activity(month))
 	content_length = None	# (very) sparse dataframe (index=date(month), columns=from, values=content-length(month in bytes))
 	threads = None			# ...
+	replies = None			# ...
 
 	def __init__(self, arch=None):
 
@@ -231,7 +232,7 @@ class Query:
 		return r
 
 
-	def threads_from(self, email_address, resolution='y', series=False):
+	def threads_replies_to(self, email_address, resolution='y', series=False):
 
 		freq = 'M'
 		if resolution.lower() == 'y':
@@ -247,7 +248,7 @@ class Query:
 
 		self._threads()
 		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
-		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq=freq), 'from']).sum()
+		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq=freq), 'from']).sum()  # <-- sum = adding up nbr references 
 		threads_from_ranking = threads_from_ranking.reset_index().pivot(columns='from', index='date', values='nbr-references').fillna(0)
 
 		if series:
@@ -264,23 +265,78 @@ class Query:
 
 		return threads_from_ranking
 
-	def threads_from_ranking(self, rank=5, filter_nettime=True, series=False):
+	def threads_replies_to_ranking(self, rank=5, filter_nettime=True):
 
 		self._threads()
-		threads_from = self.threads.reindex(columns=['from', 'nbr-references'])
-		threads_from_ranking = threads_from.groupby([pd.TimeGrouper(freq='AS'), 'from']).sum()
-		threads_from_ranking = threads_from_ranking.reset_index().pivot(columns='from', index='date', values='nbr-references').fillna(0)
-		tfr = threads_from_ranking.sum(axis=0).order(ascending=False)
+
+		tfr = self.threads.reindex(columns=['from', 'nbr-references']).groupby('from').sum().sort_values('nbr-references', ascending=False)
 
 		if filter_nettime:
 			p = r'^((?!nettime*).)*$'
 			tfr = tfr[tfr.index.str.contains(p)]
 
-		if series:
-			return tfr[:rank]
-
-		tfr = tfr[:rank].to_frame('nbr-threads').astype(int)
+		tfr = tfr[:rank].astype(int)
 		return tfr
+
+	def threads_initiated_from_ranking(self, rank=5, filter_nettime=True, series=False):
+
+		self._threads()
+		tir = self.threads.reindex(columns=['from']).groupby('from').size().sort_values(ascending=False)
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			tir = tir[tir.index.str.contains(p)]
+
+		if series:
+			return tir[:rank]
+
+		return tir[:rank].to_frame('nbr-initiated-threads').astype(int)
+
+	def threads_activity_threads_initiated_avg_ranking(self, rank=5, filter_nettime=True):
+
+		# activity
+		self._activity()
+		afr = self.activity.sum(axis=0).astype(int)
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			afr = afr[afr.index.str.contains(p)]
+
+		# initiated threads [top 25]
+		self._threads()
+		tir = self.threads.reindex(columns=['from']).groupby('from').size().sort_values(ascending=False)[:25] # <-- top 25
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			tir = tir[tir.index.str.contains(p)]
+
+		inter = afr.index.intersection(tir.index)
+		avg = tir[inter] / afr[inter]
+
+		labels = ['messages', 'threads', 'avg.threads']
+		return pd.concat([afr[avg.index], tir[avg.index], avg], axis=1, keys=labels).sort_values('avg.threads', ascending=False)[:rank]
+
+	def threads_initiated_replies_avg_ranking(self, rank=5, filter_nettime=True):
+
+		self._threads()
+
+		#initiated
+		tir = self.threads.reindex(columns=['from']).groupby('from').size().sort_values(ascending=False)
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			tir = tir[tir.index.str.contains(p)]
+
+		#replies [top 25]
+		tfr = self.threads.reindex(columns=['from', 'nbr-references']).groupby('from').sum().sort_values('nbr-references', ascending=False)[:25] # <-- top 25
+		if filter_nettime:
+			p = r'^((?!nettime*).)*$'
+			tfr = tfr[tfr.index.str.contains(p)]
+		tfr = tfr['nbr-references']			# dataframe to series
+
+
+		inter = tir.index.intersection(tfr.index)
+		avg = tfr[inter] / tir[inter] 
+
+		labels = ['threads', 'replies', 'avg.replies']
+		return pd.concat([tir[avg.index], tfr[avg.index], avg], axis=1, keys=labels).sort_values('avg.replies', ascending=False)[:rank]
+
 
 	def threads_overall(self, resolution='y', aggregate='sum', tresh=0):
 
@@ -320,3 +376,66 @@ class Query:
 			y.index.name = 'year-month'
 
 		return y	
+
+
+	'''
+	replies
+	'''
+
+	def _replies(self):
+
+		if self.replies is None:
+			self.replies = self.netarchive.dataframe[self.netarchive.dataframe['references'] > 0].reindex(columns=['from','references'])
+		return self.replies;
+
+	def replies_ranking(self, rank=5, resolution=None):
+
+		self._replies()
+
+		if resolution == None:
+			data = self.replies.groupby('from').size().sort_values(ascending=False)[:rank]
+			return data.to_frame('nbr_replies')
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None
+
+		# get the threads ranking per time resolution
+		# 
+		data = self.replies.groupby([pd.TimeGrouper(freq=freq)])
+		r = {}
+		for k, v in data:
+			if freq == 'AS':
+				time_key = k.strftime('%Y')
+			else:
+				time_key = k.strftime('%Y-%m')
+			frame = v.groupby('from').size().sort_values(ascending=False)[:rank]
+			r[time_key] = frame.to_frame('nbr_replies')
+		return r
+
+	def replies_avg_ranking(self, rank=5, filter_nettime=True):
+
+			# activity
+			self._activity()
+			afr = self.activity.sum(axis=0)
+			if filter_nettime:
+				p = r'^((?!nettime*).)*$'
+				afr = afr[afr.index.str.contains(p)]
+
+			# replies in thread [top 25]
+
+			self._replies()
+			rpl = data = self.replies.groupby('from').size().sort_values(ascending=False)[:25]
+
+			inter = afr.index.intersection(rpl.index)
+			avg = rpl[inter] / afr[inter]
+
+			labels = ['messages', 'replies', 'avg.replies']
+			return pd.concat([afr[avg.index], rpl[avg.index], avg], axis=1, keys=labels).sort_values('avg.replies', ascending=False)[:rank]
+
+
+
