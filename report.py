@@ -107,10 +107,10 @@ def run(options):
 if __name__ == "__main__":
 
     p = OptionParser();
-    p.add_option('-i', '--input-script', action="store", help="..")
-    p.add_option('-o', '--output-file', action="store", help="..")
-    p.add_option('-t', '--template-file', action="store", help="..")
-    p.add_option('-a', '--archive', action="store", help="..", default="nettime-l_2016-12-31.json.gz")
+    p.add_option('-i', '--input-script', action="store", help="input (json) script mapping commands to text placeholders")
+    p.add_option('-o', '--output-file', action="store", help="report file to be generated")
+    p.add_option('-t', '--template-file', action="store", help="template file from which the report is generated")
+    p.add_option('-a', '--archive', action="store", help="the archive dir or file (.json.gz) to produce the report from (default='nettime-l_2016-12-31.json.gz')", default="nettime-l_2016-12-31.json.gz")
 
     options, args = p.parse_args()
 

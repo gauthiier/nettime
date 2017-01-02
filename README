@@ -9,6 +9,23 @@ Options:
 
  Dependencies: bs4
 
- ---
+---
+
+Usage: report.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -i INPUT_SCRIPT, --input-script=INPUT_SCRIPT
+                        input (json) script mapping commands to text
+                        placeholders
+  -o OUTPUT_FILE, --output-file=OUTPUT_FILE
+                        report file to be generated
+  -t TEMPLATE_FILE, --template-file=TEMPLATE_FILE
+                        template file from which the report is generated
+  -a ARCHIVE, --archive=ARCHIVE
+                        the archive dir or file (.json.gz) to produce the
+                        report from (default='nettime-l_2016-12-31.json.gz')
+
+Dependencies: pandas, matplotlib (for graphs)
 
  
