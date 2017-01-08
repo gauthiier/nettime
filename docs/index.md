@@ -119,7 +119,7 @@ What becomes clear from the chart above is how the ratio of replies and threads 
 
 ![figure 3: Difference of the sum of threads and replies versus single messages](figures/figure_3.png)
 
-According to our survey, it is fair to say that Nettime has become a more dialogical mailing list in the second decade of its existence, and that, even if the number of messages in total have declined considerably during that time. Since 2006, the list steadily churns out, on average, more threads and replies than single messages posting; in other words, less announcements and more discussions/dialogs. 
+According to our survey, it is fair to say that Nettime has become a more dialogical mailing list in the second decade of its existence. Since 2006, the list steadily churns out, on average, more threads and replies than single messages posting; in other words, less announcements and more discussions/dialogs. 
 
 The following chart (_figure 5_) shows an even more sustained trend that complements our observations, that is, the ratio of the number of replies per thread. This steady, almost linear, increase over time of the number of replies to given threads shows a certain 'maturity' of the list as it demonstrates how Nettime dialogs are composed of an increasing number of messages and interlocutors.  
 
