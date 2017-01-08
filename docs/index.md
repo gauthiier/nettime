@@ -2,6 +2,8 @@
 title: Nettime Survey (1995-2016)
 ---
 
+![](figures/Nettime.org-logo.png)
+
 #Synopsis
 
 While contemporary social media have been critiqued for their ephemeral effects on activist politics, the mailing list has proven an enduring venue for geographically dispersed communities to participate remain in dialog over the course of decades. Founded in Amsterdam in 1995, the Nettime mailing list ([http://nettime.org](http://nettime.org)) has played host to a community of activists and media artists and help to launch or establish the careers of a number of prominent new media theorists and Internet critics. Established in an era prior to the corporatization of the Web, over the course of its twenty first years (1995-2016), Nettime has continued to discuss the Web in terms of the radical political possibilities with which it was imagined in its ‘salad days’.
