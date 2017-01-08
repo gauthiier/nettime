@@ -9,8 +9,8 @@ import query
 # for colors see:
 # http://matplotlib.org/examples/color/named_colors.html
 
-def bar_plot_series(series, title, color='blueviolet'):
-	return series.plot(kind = 'bar', title=title, color=color, alpha=0.8, stacked=True)
+def bar_plot_series(series, title, color='blueviolet', ylim=None):
+	return series.plot(kind = 'bar', title=title, color=color, alpha=0.8, stacked=True, ylim=ylim)
 
 def save(plot, name):
 	fig = plot.get_figure()

@@ -82,7 +82,12 @@ def run(options):
 		print 'No template file. Nothing to do.'
 		return
 
-	a = nettime.archive.Archive(options.archive)
+	if os.path.isfile(options.archive): 
+		path, file = os.path.split(options.archive)
+		a = nettime.archive.Archive(data=file, archive_dir=path)
+	else:
+		a = nettime.archive.Archive(options.archive)
+	
 	q = nettime.query.Query(a)
 	r = nettime.report.Report(q)
 

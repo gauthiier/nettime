@@ -502,3 +502,26 @@ div.footnotes li[id^="fn"] /* A footnote item within that div */
         display:none;
         }
     }
+
+/* custom styling for nettime survey (1995-2016)*/
+
+.thread_rank_year {
+    display: inline-block;
+    border: 1px solid black; 
+    margin: 1em;     
+}
+
+.thread_rank_year:hover {
+    background-color: #964be3;
+}
+
+.thread_rank_year .year_t {
+    bborder: 1px solid black;
+    margin: 1em;
+}
+
+.thread_rank_year .rank_t {
+    display: none;
+    margin: 1em;
+    margin-bottom: 2em;
+}

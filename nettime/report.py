@@ -35,13 +35,24 @@ class Report:
 			# nbr non-replies (aka. non-threads)
 			mat['nbr-single-messages'] = mat['nbr-messages'] - mat['nbr-replies'] - mat['nbr-threads']
 
-			# avg. rep per message
-			mat['avg--per-msg'] = mat['nbr-threads'] / mat['nbr-messages']
+			# avg. threads per message
+			mat['avg-thrd-per-msg'] = mat['nbr-threads'] / mat['nbr-messages']
+
+			# avg. replies per message
+			mat['avg-rep-per-msg'] = mat['nbr-replies'] / mat['nbr-messages']			
+
+			# avg. threadss + replies per message
+			mat['avg-thrd-rep-per-msg'] = (mat['nbr-threads'] + mat['nbr-replies']) / mat['nbr-messages']			
+
+			# avg. threadss + replies per message
+			mat['diff-thrd-rep-vs-single-msg'] = (mat['nbr-threads'] + mat['nbr-replies']) - mat['nbr-single-messages']			
 
 			# avg. rep per thread
 			mat['avg-rep-per-thrd'] = mat['nbr-replies'] / mat['nbr-threads']	
 			# same as:
 			# mat['avg-rep-per-thrd'] = q.threads_overall(aggregate='mean')['nbr-references']
+
+
 
 			self.matrix = mat
 
@@ -69,23 +80,42 @@ class Report:
 
 		return plot.bar_plot_series(self.matrix['nbr-replies'].to_frame(label), title=title, color=color)
 
-	def plot_avg_rep_p_msg(self, title='Avg. Thread per Message', label='replies-per-messasges', color='limegreen'):
+	def plot_avg_thread_p_msg(self, title='Avg. Threads', label='', color='crimson'):
 
 		self.matrix_msgs_threads()
 
-		return plot.bar_plot_series(self.matrix['avg--per-msg'].to_frame(label), title=title, color=color)
+		return plot.bar_plot_series(self.matrix['avg-thrd-per-msg'].to_frame(label), title=title, color=color)
 
-	def plot_avg_rep_p_thrd(self, title='Avg. Replies per Thread', label='replies-per-thread', color='blueviolet'):
+	def plot_avg_replies_p_msg(self, title='Avg. Replies', label='', color='dimgray'):
+
+		self.matrix_msgs_threads()
+
+		return plot.bar_plot_series(self.matrix['avg-rep-per-msg'].to_frame(label), title=title, color=color)
+
+	def plot_avg_threads_replies_p_msg(self, title='Avg. Threads + Replies', label='avg', color='crimson'):
+
+		self.matrix_msgs_threads()
+
+		return plot.bar_plot_series(self.matrix['avg-thrd-rep-per-msg'].to_frame(label), title=title, color=color)
+
+	def plot_diff_threads_replies_v_single_msg(self, title='Diff. Threads + Replies vs Single Messages', label='diff', color='b'):
+
+		self.matrix_msgs_threads()
+
+		return plot.bar_plot_series(self.matrix['diff-thrd-rep-vs-single-msg'].to_frame(label), title=title, color=color)
+
+
+	def plot_avg_rep_p_thrd(self, title='Ratio Replies per Thread', label='replies-per-thread', color='blueviolet'):
 
 		self.matrix_msgs_threads()
 
 		return plot.bar_plot_series(self.matrix['avg-rep-per-thrd'].to_frame(label), title=title, color=color)
 
-	def plot_msgs_replies(self, title='Nbr. Messages segments (individual messages vs thread replies)'):
+	def plot_msgs_replies(self, title='Messages Constituency'):
 
 		self.matrix_msgs_threads()
 
-		return plot.bar_plot_series(self.matrix[['nbr-single-messages', 'nbr-threads', 'nbr-replies']], color=['mediumblue', 'red', 'dimgray'], title=title)
+		return plot.bar_plot_series(self.matrix[['nbr-single-messages', 'nbr-threads', 'nbr-replies']], color=['b', 'crimson', 'dimgray'], title=title)
 
 	'''
 	text (tabular)
@@ -98,13 +128,13 @@ class Report:
 
 	def tab_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
-		return format.Tab.from_dataframe(self.matrix[['avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+		return format.Tab.from_dataframe(self.matrix[['avg-thrd-per-msg', 'avg-rep-per-thrd']], 
+			name_map={'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
 
-	def html_msgs_threads_replies_avg_rep_msg_thrd(self):
+	def tab_msgs_threads_replies_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
-		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads', 'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg-thrd-per-msg', 'avg-rep-per-thrd']], 
+			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads', 'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
 
 	def tab_activity_from_ranking(self, rank=5):
 		d = self.query.activity_from_ranking(rank=rank)
@@ -166,13 +196,13 @@ class Report:
 
 	def html_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
-		return format.Html.from_dataframe(self.matrix[['avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+		return format.Html.from_dataframe(self.matrix[['avg-thrd-per-msg', 'avg-rep-per-thrd']], 
+			name_map={'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
 
 	def html_msgs_threads_replies_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
-		return format.Html.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg--per-msg', 'avg-rep-per-thrd']], 
-			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads', 'avg--per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+		return format.Html.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg-thrd-per-msg', 'avg-rep-per-thrd']], 
+			name_map={'nbr-messages': 'Messages', 'nbr-threads': 'Threads', 'nbr-replies': 'Replies in threads', 'avg-thrd-per-msg': 'Avg. Threads', 'avg-rep-per-thrd': 'Ratio Replies per Thread'})
 
 	def html_activity_from_ranking(self, rank=10):
 		d = self.query.activity_from_ranking(rank=rank)
@@ -212,8 +242,12 @@ class Report:
 		nl = '\n'
 		s = ""
 		for i in years:
+			s += '<div class="thread_rank_year">' + nl	
 			s += '<div class="year_t">' + i + '</div>' + nl
+			s += '<div class="rank_t">' + nl
 			s += format.Html.from_dataframe(d[i], name_map={'nbr-references': 'nbr. replies'}, url_map={'subject': 'url'}) + nl
+			s += '</div>' + nl
+			s += '</div>' + nl
 		return s + nl
 
 	def html_replies_ranking(self, rank=10):

@@ -8,25 +8,25 @@
 		"replace": "<--html_activity_from_ranking-->"
 	},
 	{	"format": "html", 
-		"command": "html_threads_replies_to_ranking", 
-		"replace": "<--html_threads_replies_to_ranking-->"
-	},
-	{	"format": "html", 
 		"command": "html_threads_initiated_from_ranking", 
 		"replace": "<--html_threads_initiated_from_ranking-->"
 	},	
 	{	"format": "html", 
 		"command": "html_threads_activity_threads_initiated_avg_ranking", 
 		"replace": "<--html_threads_activity_threads_initiated_avg_ranking-->"
-	},	
+	},
+	{	"format": "html", 
+		"command": "html_threads_replies_to_ranking", 
+		"replace": "<--html_threads_replies_to_ranking-->"
+	},
+	{	"format": "html", 
+		"command": "html_threads_replies_to_ranking", 
+		"replace": "<--html_threads_replies_to_ranking-->"
+	},
 	{	"format": "html", 
 		"command": "html_threads_initiated_replies_avg_ranking", 
 		"replace": "<--html_threads_initiated_replies_avg_ranking-->"
 	},		
-	{	"format": "html", 
-		"command": "html_msgs_threads_replies", 
-		"replace": "<--html_msgs_threads_replies-->"
-	},	
 	{	"format": "html", 
 		"command": "html_replies_ranking", 
 		"replace": "<--html_replies_ranking-->"
@@ -36,8 +36,11 @@
 		"replace": "<--html_replies_avg_ranking-->"
 	},		
 	{	"format": "html", 
+		"command": "html_threads_ranking", 
+		"replace": "<--html_threads_ranking-->"
+	},
+	{	"format": "html", 
 		"command": "html_threads_ranking_year", 
 		"replace": "<--html_threads_ranking_year-->"
-	}		
-
+	}			
 ]
