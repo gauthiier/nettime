@@ -35,7 +35,7 @@ It is worth noting that our study is not (at this stage) a discourse analysis of
 
 ##Activity
 
-There are a few instances where Nettime talks to itself, notably to inform of the number of subscribers that are on the list. These messages usually report certain subscription milestones. From the current archive, we have identified six of these messages (listed in the table below) which gives an idea of the 'subscription rate' of Nettime over the years. 
+There are a few instances where Nettime talks to itself, notably to inform the list of the number of its subscribers. These messages usually report certain subscription milestones, and from the current archive, we have identified six of these messages (listed in the table below) which gives an idea of the 'subscription rate' of Nettime over the years. 
 
 One can clearly see that this rate increases at the beginning of the 00's, flattens out between 2002 and 2005, diminishes considerably between 2005 and 2011 and increases slightly between 2011 and 2015. More precisely, if we assume the subscription rate to be linear (which of course is not really), from 1995 to 2001 the rate is roughly 33 subscriptions/month, from 2001 to 2002 it is 66 subscriptions/month (600 in 9 months), from 2002 to 2004 it accounts to 27 subscriptions/month, from 2004 to 2005 to 25 subscriptions/month, form 2005 to 2011 it drops to 6 subscriptions/month and finally it amounts to 10 subscriptions/month from 2011 to 2015. 
 
