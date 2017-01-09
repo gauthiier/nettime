@@ -185,17 +185,17 @@ Our survey's replies statistics are divided into two categories: (1) replies to 
 
 #Method & Archives
 
-The survey's object of study is Nettime's archived mailing list, which is available online [nettime.org/archive.php](nettime.org/archive.php). Though we had to program a custom [MHonArc](http://www.mhonarc.at) web scrapper to gather all the messages from this online archive as there is no export function available from the current web interface. 
+The survey's object of study is Nettime's archived mailing list, which is available online [nettime.org/archive.php](nettime.org/archive.php). We had to program a custom [MHonArc](http://www.mhonarc.at) web scrapper to gather all the messages from this online archive since there is no export function available from the current web interface. 
 
 * All Nettime Survey's scripts written in Python are publicly available and can be found at [https://github.com/gauthiier/nettime](https://github.com/gauthiier/nettime). The logic and output scripts heavily rely on [pandas](http://pandas.pydata.org) and [matplotlib](http://matplotlib.org).
 * Nettime archive (1995-2016) is publicly available in the legacy [mbox](http://www.qmail.org/man/man5/mbox.html) format at the following address: [http://nettime-survey.xyz/arch/nettime-l-2016-12-31.mbox.tar.gz](http://nettime-survey.xyz/arch/nettime-l-2016-12-31.mbox.tar.gz) (archived 31/12/2016)
 * Nettime archive (1995-2016) is publicly available in json format at the following address: [http://nettime-survey.xyz/arch/nettime-l-2016-12-31.json.gz](http://nettime-survey.xyz/arch/nettime-l-2016-12-31.json.gz) (archived 31/12/2016)
 
-Also, consistent with the ‘90’s-era origins of the Nettime list our survey aesthetically resembles a web 1.0 report and does not allow for much interaction (static page). This was done deliberately ;-)
+Also, consistent with the ‘90’s-era origins of the Nettime list, our survey aesthetically resembles a web 1.0 report and does not allow for much interaction (static page). This was deliberate ;-)
 
 #Further Research
 
-To our mind the content of the posts and conversations in Nettime is, in fact, what makes this list of particular interest from the perspective of new media studies. Our survey is, of course, limited in scope and could have featured a much deeper (and perhaps more scientific) analysis of Nettime. To this end, here are a couple of points that may be worked on:
+To our mind the content of the posts and conversations in Nettime is, in fact, what makes this list of particular interest from the perspective of new media studies. Our survey is, of course, limited in scope and could have featured a much deeper (and perhaps more scientific) analysis of the list. To this end, here are a couple of points that may be worked on:
 
 * It seems that a thorough time analysis of the list would prompt interesting question has to do with periodizing the ‘eras’ or ‘times of Nettime’, in terms of who were the main contributing figures in different periods and how might they have clustered into specific cohorts.
 
