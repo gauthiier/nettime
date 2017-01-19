@@ -110,7 +110,6 @@ In our conversations with Geert Lovink, we derived a few observations on the dat
 Was Nettime's heyday only part of the first decade of its existence? Judged solely in terms of sheer amount of postings to the list (activity), it clearly can be seen to have diminished. However, in what follows, we propose different schemata, measuring the amount of dialog on the list (vigour) as well categorizing that dialog by the most prolific contributors (outspokeness).
 
 
-
 ##Vigour
 
 A mailing list certainly lay itself to announcements-type messages where a single message is posted to the list while no one does and/or is expected to reply. Yet, more importantly, what mailing lists also allow is to produce 'threads' which are formed around a varying amount of replies to an initial message. These threads form the basis of an asynchronous 'dialog' so to speak. As introduce in the previous section, we came up with the term 'vigour' to account for this practice of replying to messages, which, in turn, create 'dialogical' dynamics between some of the list's members. 
@@ -176,7 +175,7 @@ Our survey's replies statistics are divided into two categories: (1) replies to 
 <--html_threads_initiated_replies_avg_ranking-->
 
 <div class="figure"><p class="caption">table 6: Top 10 contributors ranking for average amount of 'replies to'</p></div>
-
+ 
 <--html_replies_ranking-->
 
 <div class="figure"><p class="caption">table 7: Top 10 contributors ranking for amount of 'replies from'</p></div>

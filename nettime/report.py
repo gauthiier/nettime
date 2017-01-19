@@ -208,31 +208,31 @@ class Report:
 	def html_msgs_threads_replies_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
 		return format.Html.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg-thrd-per-msg', 'avg-rep-per-thrd']], 
-			name_map={'nbr-messages': 'Messages', 'nbr-threads': 'Threads', 'nbr-replies': 'Replies in threads', 'avg-thrd-per-msg': 'Avg. Threads', 'avg-rep-per-thrd': 'Ratio Replies per Thread'})
+			name_map={'year': 'Year', 'nbr-messages': 'Messages', 'nbr-threads': 'Threads', 'nbr-replies': 'Replies', 'avg-thrd-per-msg': 'Avg. Threads', 'avg-rep-per-thrd': 'Ratio Replies per Thread'})
 
 	def html_activity_from_ranking(self, rank=10):
 		d = self.query.activity_from_ranking(rank=rank)
-		return format.Html.from_dataframe(d, name_map={'nbr-bytes': 'bytes'})		
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'nbr-messages': 'Messages'})		
 
 	#
 	def html_threads_replies_to_ranking(self, rank=10):
 		d = self.query.threads_replies_to_ranking(rank=rank)
-		return format.Html.from_dataframe(d)		
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'nbr-references': 'Replies'})		
 
 	#
 	def html_threads_initiated_from_ranking(self, rank=10):
 		d = self.query.threads_initiated_from_ranking(rank=rank)
-		return format.Html.from_dataframe(d)		
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'nbr-initiated-threads': '(Initiated) Threads)'})		
 
 	#
 	def html_threads_activity_threads_initiated_avg_ranking(self, rank=10):
 		d = self.query.threads_activity_threads_initiated_avg_ranking(rank=rank)
-		return format.Html.from_dataframe(d)		
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'messages': 'Messages', 'threads': 'Threads', 'avg.threads': 'Avg. Threads'})		
 
 	#
 	def html_threads_initiated_replies_avg_ranking(self, rank=10):
 		d = self.query.threads_initiated_replies_avg_ranking(rank=rank)
-		return format.Html.from_dataframe(d)				
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'threads': 'Threads', 'replies': 'Replies', 'avg.replies': 'Avg. Replies'})				
 
 	def html_content_length_from_ranking(self, rank=10):
 		d = self.query.activity_from_ranking(rank=rank)
@@ -240,7 +240,7 @@ class Report:
 
 	def html_threads_ranking(self, rank=10):
 		d = self.query.threads_ranking(rank=rank)
-		return format.Html.from_dataframe(d, name_map={'nbr-references': 'nbr. replies'}, url_map={'subject': 'url'})
+		return format.Html.from_dataframe(d, name_map={'date': 'Date', 'subject': 'Subject', 'from': 'From', 'nbr-references': 'Replies'}, url_map={'Subject': 'url'})
 
 	def html_threads_ranking_year(self, rank=5, resolution='y'):
 		d = self.query.threads_ranking(rank=rank, resolution=resolution)
@@ -251,17 +251,17 @@ class Report:
 			s += '<div class="thread_rank_year">' + nl	
 			s += '<div class="year_t">' + i + '</div>' + nl
 			s += '<div class="rank_t">' + nl
-			s += format.Html.from_dataframe(d[i], name_map={'nbr-references': 'nbr. replies'}, url_map={'subject': 'url'}) + nl
+			s += format.Html.from_dataframe(d[i], name_map={'date': 'Date', 'subject': 'Subject', 'from': 'From', 'nbr-references': 'Replies'}, url_map={'Subject': 'url'}) + nl
 			s += '</div>' + nl
 			s += '</div>' + nl
 		return s + nl
 
 	def html_replies_ranking(self, rank=10):
 		d = self.query.replies_ranking(rank=rank)
-		return format.Html.from_dataframe(d, name_map={'nbr-replies': 'nbr. replies'})
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'nbr_replies': 'Replies'})
 
 	def html_replies_avg_ranking(self, rank=10):
 		d = self.query.replies_avg_ranking(rank=rank)
-		return format.Html.from_dataframe(d, name_map={'nbr-replies': 'nbr. replies'})				
+		return format.Html.from_dataframe(d, name_map={'from': 'From', 'messages': 'Messages', 'replies': 'Replies', 'avg.replies': 'Avg. Replies'})				
 
 

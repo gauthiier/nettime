@@ -45,7 +45,10 @@ class Html:
 	def from_dataframe(data_frame, table_name=None, name_map={}, url_map={}):
 
 		header = []
-		header.append(data_frame.index.name)
+		if data_frame.index.name in name_map:
+			header.append(name_map[data_frame.index.name])
+		else:
+			header.append(data_frame.index.name)
 		for h in data_frame.columns:
 			if h in name_map:
 				h = name_map[h]

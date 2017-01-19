@@ -443,7 +443,7 @@ class Query:
 			else:
 				time_key = k.strftime('%Y-%m')
 			frame = v.groupby('from').size().sort_values(ascending=False)[:rank]
-			r[time_key] = frame.to_frame('nbr_replies')
+			r[time_key] = frame.to_frame('nbr-replies')
 		return r
 
 	def replies_avg_ranking(self, rank=5, filter_nettime=True):
