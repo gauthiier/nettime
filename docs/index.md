@@ -6,7 +6,7 @@ title: Nettime Survey (1995-2016)
 
 #Synopsis
 
-While contemporary social media have been critiqued for their ephemeral effects on activist politics, the mailing list has proven an enduring venue for geographically dispersed communities to participate remain in dialog over the course of decades. Founded in Amsterdam in 1995, the Nettime mailing list ([http://nettime.org](http://nettime.org)) has played host to a community of activists and media artists and help to launch or establish the careers of a number of prominent new media theorists and Internet critics. Established in an era prior to the corporatization of the Web, over the course of its twenty first years (1995-2016), Nettime has continued to discuss the Web in terms of the radical political possibilities with which it was imagined in its ‘salad days’.
+While contemporary social media have been critiqued for their ephemeral effects on activist politics, the mailing list has proven an enduring venue for geographically dispersed communities to participate and remain in dialog over the course of decades. Founded in Amsterdam in 1995, the Nettime mailing list ([http://nettime.org](http://nettime.org)) has played host to a community of activists and media artists and help to launch or establish the careers of a number of prominent new media theorists and Internet critics. Established in an era prior to the corporatization of the Web, over the course of its twenty first years (1995-2016), Nettime has continued to discuss the Web in terms of the radical political possibilities with which it was imagined in its ‘salad days’.
 
 This project aims to trace the evolution of Nettime (more precisely nettime-l) through a survey of its mailing list's archive ([http://nettime.org/archives.php](http://nettime.org/archives.php)). 
 
@@ -14,7 +14,7 @@ This project aims to trace the evolution of Nettime (more precisely nettime-l) t
 
 During our quick investigation of Nettime's list structure and content, we came up with three main clusters of questions that we subsequently approached in our study.
 
-* List activity: As a mailing list, Nettime is popularly associated with mid-90's / early 2000's media activism, yet it continues to be active to this day. 
+* List activity: As a mailing list, Nettime is popularly associated with mid-90s / early 2000s media activism, yet it continues to be active to this day. 
 
 	* When was Nettime most active?
 	* Does Nettime have periods and/or cohorts?
