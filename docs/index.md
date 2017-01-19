@@ -87,7 +87,7 @@ Put simply, 3500 subscribers joined Nettime in the first 10 years of its existen
 
 Though this is only subscriptions. Not everyone post to the list. So what about the actual number of messages over time?
 
-![figure 00: Total number of messages on Nettime](figures/figure_00.png)
+![figure 0: Sum of first message instances per month](figures/figure_0.png)
 
 What we colloquially call a "cohort" resembles, to some degree, the notion of subscription rate, which ultimately speaks to the idea of Nettime's "newcomers". Though rather than consisting of the sheer amount of subscriptions over time (data which is not available from the archive), we consider when a message first appeared on the list given an email address provenance. The graph of _figure 0_ displays the sum of these "first message" instances per month (50 months quintiles). A spike in the graph could be read as the formation of a new cohort, that is, an increase in the activity of newcomers, which may signify, albeit hypothetically, that an aggregate of common interest is broth forth on the list. Nettime's Nettimes so to speak.  
 
@@ -96,7 +96,7 @@ Theres are observable spikes that appear here and there through out the months a
 After 2004, the number of first messages declines. As noted below, this can be attributed to the creation of nettime-ann in 2005, which rerouted announcement-type activity out off  nettime-l. Nonetheless, it can be argued that, in considering the low subscription rate in the interval 2005-2011 (6 subscriptions/month), the barely noticeable peaks of 2008 and 2011 are significant. Thus Nettime may harbor more than a single 2000 cohort, 2008 and 2011 being the other two though remarkably less momentous than the first one.
 
 
-![figure 0: Total number of messages on Nettime](figures/figure_0.png)
+![figure 1: Total number of messages on Nettime](figures/figure_1.png)
 
 The graph above illustrates the total amount of messages that have been posted on Nettime over two decades. It is clear that, as with the subscription rates and the cohorts, the list was most active in 1999, 2000, 2001, 2002, and 2003. It diminished considerably in 2004 and plateaued (more or less) until 2010, then increased in 2011 and decreased again the last 5 years.
 
@@ -123,19 +123,19 @@ Our study surveys Nettime's vigour by analyzing the 'who' and 'when' of the list
 
 It is worth noting and explaining here the nomenclature/taxonomy used in the survey. First, the survey differentiates between what is called a 'message' and a 'thread', a message being anything that is posted on the list while a thread is a message that has at least one reply (a type of message that initiates a 'dialog'/thread). Every thread is a message but not all messages are threads. Second, the survey differentiates between what is dubbed a 'reply' and a thread. A reply is typically a reply to a thread, or, differently put, it is a reply to a message that makes this initial message a thread. Thus reply and thread are closely connected yet different. Needless to say that, as for the case of a thread, a reply is a message but not all messages are replies. Finally, there is single messages, ones that are neither threads or replies. The following chart is a breakdown of _figure 1_, following this 'message-thread-reply' taxonomy. 
 
-![figure 1: Total number of (1) single messages, (2) threads and (3) replies to threads](figures/figure_1.png)
+![figure 2: Total number of (1) single messages, (2) threads and (3) replies to threads](figures/figure_2.png)
 
 What becomes clear from the chart above is how the ratio of replies and threads versus the sheer amount of messages increases considerably in the last 10 years. While the volume of messages decreases, the average number of 'dialogical' messages increases (threads and replies). The following charts attest this (quite simple and obvious) observation. 
 
-![figure 2: Average of the sum of threads and replies](figures/figure_2.png)
+![figure 3: Average of the sum of threads and replies](figures/figure_3.png)
 
-![figure 3: Difference of the sum of threads and replies versus single messages](figures/figure_3.png)
+![figure 4: Difference of the sum of threads and replies versus single messages](figures/figure_4.png)
 
 According to our survey, it is fair to say that Nettime has become a more dialogical mailing list in the second decade of its existence. Since 2006, the list steadily churns out, on average, more threads and replies than single messages posting; in other words, less announcements and more discussions/dialogs. 
 
 The following chart (_figure 5_) shows an even more sustained trend that complements our observations, that is, the ratio of the number of replies per thread. This steady, almost linear, increase over time of the number of replies to given threads shows a certain 'maturity' of the list as it demonstrates how Nettime dialogs are composed of an increasing number of messages and interlocutors.  
 
-![figure 4: Ratio of number of replies per thread](figures/figure_4.png)
+![figure 5: Ratio of number of replies per thread](figures/figure_5.png)
 
 While there are many reasons that can explain this shift in the list's activities and behaviours (branching off of nettime-ann in 2005, the 'rise' of political activism since 2008, the list's subscribers knowing each other, etc.) our survey nonetheless observes a sustained trend towards Nettime developing a 'thread culture' as opposed to an earlier 'announcement culture'. Yet, since we are not performing discourse analysis of the content of the list, it is impossible to correlate a shift of discourse which could, potentially, accompany such a shift of culture. 
 
@@ -151,7 +151,7 @@ What messages have being discussed the most on Nettime? Who are the list's most 
 
 <div class="figure"><p class="caption">table 2: Top 10 contributors ranking for total amount of messages</p></div>
 
-![figure 5: Top 10 contributors ranking for total amount of messages over time](figures/figure_5.png)
+![figure 6: Top 10 contributors ranking for total amount of messages over time](figures/figure_6.png)
 
 ###Threads
 
@@ -169,21 +169,21 @@ Our survey's replies statistics are divided into two categories: (1) replies to 
 
 <--html_threads_replies_to_ranking-->
 
-<div class="figure"><p class="caption">table 5: Top 10 contributors ranking for total amount 'replies to'</p></div>
+<div class="figure"><p class="caption">table 5: Top 10 contributors ranking for total amount of 'replies to'</p></div>
 
-![figure 6: Top 10 contributors ranking for total amount of 'replies to' over time](figures/figure_6.png)
+![figure 7: Top 10 contributors ranking for total amount of 'replies to' over time](figures/figure_7.png)
 
 <--html_threads_initiated_replies_avg_ranking-->
 
-<div class="figure"><p class="caption">table 6: Top 10 contributors ranking for average amount 'replies to'</p></div>
+<div class="figure"><p class="caption">table 6: Top 10 contributors ranking for average amount of 'replies to'</p></div>
 
 <--html_replies_ranking-->
 
-<div class="figure"><p class="caption">table 7: Top 10 contributors ranking for average amount 'replies from'</p></div>
+<div class="figure"><p class="caption">table 7: Top 10 contributors ranking for amount of 'replies from'</p></div>
 
 <--html_replies_avg_ranking-->
 
-<div class="figure"><p class="caption">table 8: Top 10 contributors ranking for average amount 'replies from'</p></div>
+<div class="figure"><p class="caption">table 8: Top 10 contributors ranking for average amount of 'replies from'</p></div>
 
 ###Most replied messages overall (1995-2016)
 
