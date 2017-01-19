@@ -4,5 +4,5 @@ __pycache__/
 *$py.class
 
 # local work dirs
-archives
-setenv
+archives/
+setenv/

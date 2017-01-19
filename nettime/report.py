@@ -117,6 +117,12 @@ class Report:
 
 		return plot.bar_plot_series(self.matrix[['nbr-single-messages', 'nbr-threads', 'nbr-replies']], color=['b', 'crimson', 'dimgray'], title=title)
 
+	def plot_cohort(self, title='Cohorts'):
+
+		c = self.query.cohort()
+
+		return c.plot(color='b', title=title)
+
 	'''
 	text (tabular)
 	'''

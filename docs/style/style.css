@@ -518,7 +518,7 @@ div.footnotes li[id^="fn"] /* A footnote item within that div */
 }
 
 .thread_rank_year .year_t:hover {
-    background-color: #964be3;
+    background-color: blue;
 }
 
 

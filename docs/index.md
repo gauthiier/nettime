@@ -31,13 +31,14 @@ During our quick investigation of Nettime's list structure and content, we came 
 	* How might one begin to periodize the list in light of these contributions?
 	* Does Nettime have cliques? 
 
-It is worth noting that our study is not (at this stage) a discourse analysis of the content of the mailing list per se. Rather, we used the structure of the list itself (the "meta-data" so to speak) to infer a type of "time series" of the networked activity that occurred on the list in the past 21 years (1995-2016). 
+It is worth noting that our study does not (at this stage) present a discourse analysis of the content of the mailing list per se. Rather, we used the structure of the list itself (the "meta-data" so to speak) to infer a type of "time series" of the networked activity that occurred on the list in the past 21 years (1995-2016). 
 
 ##Activity
 
 There are a few instances where Nettime talks to itself, notably to inform the list of the number of its subscribers. These messages usually report certain subscription milestones, and from the current archive, we have identified six of these messages (listed in the table below) which gives an idea of the 'subscription rate' of Nettime over the years. 
 
-One can clearly see that this rate increases at the beginning of the 00's, flattens out between 2002 and 2005, diminishes considerably between 2005 and 2011 and increases slightly between 2011 and 2015. More precisely, if we assume the subscription rate to be linear (which of course is not really), from 1995 to 2001 the rate is roughly 33 subscriptions/month, from 2001 to 2002 it is 66 subscriptions/month (600 in 9 months), from 2002 to 2004 it accounts to 27 subscriptions/month, from 2004 to 2005 to 25 subscriptions/month, form 2005 to 2011 it drops to 6 subscriptions/month and finally it amounts to 10 subscriptions/month from 2011 to 2015. 
+One can clearly see that this rate increases at the beginning of the 00's, flattens out between 2002 and 2005, diminishes considerably between 2005 and 2011 and increases slightly between 2011 and 2015. More precisely, if, for the sake of argument, we were to assume the subscription rate to be linear (which of course is not really), then from 1995 to 2001 the rate is roughly 33 subscriptions/month, from 2001 to 2002 it is 66 subscriptions/month (600 in 9 months), from 2002 to 2004 it accounts to 27 subscriptions/month, from 2004 to 2005 to 25 subscriptions/month, form 2005 to 2011 it drops to 6 subscriptions/month and finally it amounts to 10 subscriptions/month from 2011 to 2015. 
+
 
 <table>
 <tbody>
@@ -86,9 +87,18 @@ Put simply, 3500 subscribers joined Nettime in the first 10 years of its existen
 
 Though this is only subscriptions. Not everyone post to the list. So what about the actual number of messages over time?
 
+![figure 00: Total number of messages on Nettime](figures/figure_00.png)
+
+What we colloquially call a "cohort" resembles, to some degree, the notion of subscription rate, which ultimately speaks to the idea of Nettime's "newcomers". Though rather than consisting of the sheer amount of subscriptions over time (data which is not available from the archive), we consider when a message first appeared on the list given an email address provenance. The graph of _figure 0_ displays the sum of these "first message" instances per month (50 months quintiles). A spike in the graph could be read as the formation of a new cohort, that is, an increase in the activity of newcomers, which may signify, albeit hypothetically, that an aggregate of common interest is broth forth on the list. Nettime's Nettimes so to speak.  
+
+Theres are observable spikes that appear here and there through out the months and years in _figure 0_, however, these are short lived (max 6 months). What is more striking is the sustained activity that occurred in first two quintiles of the graph (1996-2004). This activity can be correlated with the high subscription rate described earlier. Though, unlike subscriptions, the amount of "first messages" peaked around the year 2000, rather than between 2001-2002 (66 subscriptions/month). Let us call this peak the 2000 cohort.
+
+After 2004, the number of first messages declines. As noted below, this can be attributed to the creation of nettime-ann in 2005, which rerouted announcement-type activity out off  nettime-l. Nonetheless, it can be argued that, in considering the low subscription rate in the interval 2005-2011 (6 subscriptions/month), the barely noticeable peaks of 2008 and 2011 are significant. Thus Nettime may harbor more than a single 2000 cohort, 2008 and 2011 being the other two though remarkably less momentous than the first one.
+
+
 ![figure 0: Total number of messages on Nettime](figures/figure_0.png)
 
-From the graph above, it is clear that, as with the subscription rates, the list was most active in 1999, 2000, 2001, 2002, and 2003. It diminished considerably in 2004 and plateaued (more or less) until 2010, then increased in 2011 and decreased again the last 5 years.
+The graph above illustrates the total amount of messages that have been posted on Nettime over two decades. It is clear that, as with the subscription rates and the cohorts, the list was most active in 1999, 2000, 2001, 2002, and 2003. It diminished considerably in 2004 and plateaued (more or less) until 2010, then increased in 2011 and decreased again the last 5 years.
 
 In our conversations with Geert Lovink, we derived a few observations on the data at hand, mainly that:
 
@@ -97,7 +107,9 @@ In our conversations with Geert Lovink, we derived a few observations on the dat
 * The spikes in 2008/2009 may be explained by the global economical context.
 * The spike in 2011 may be explained by the political uprisings in the middle-east.
 
-But are Nettime's heydays only part of the first decade of its existence, its activity slowly declining since then, or is the list itself becoming something else than it may have been back then?
+Was Nettime's heyday only part of the first decade of its existence? Judged solely in terms of sheer amount of postings to the list (activity), it clearly can be seen to have diminished. However, in what follows, we propose different schemata, measuring the amount of dialog on the list (vigour) as well categorizing that dialog by the most prolific contributors (outspokeness).
+
+
 
 ##Vigour
 
@@ -109,7 +121,7 @@ Our study surveys Nettime's vigour by analyzing the 'who' and 'when' of the list
 
 <div class="figure"><p class="caption">table 1: Nettime list's components (message, threads, replies) year by year</p></div>
 
-It is worth noting and explaining here the nomenclature/taxonomy used in the survey. First, the survey differentiates between what is called a 'message' and a 'thread', a message being anything that is posted on the list while a thread is a message that has at least one reply (a type of message that initiates a 'dialog'/thread). Thus, every thread is a message but not all messages are threads. Second, the survey differentiates between what is dubbed a 'reply' and a thread. A reply is typically a reply to a thread, or, differently put, it is a reply to a message that makes this initial message a thread. Thus reply and thread are closely connected yet different. Needless to say that, as for the case of a thread, a reply is a message but not all messages are replies. Finally, there is single messages, ones that are neither threads or replies. The following chart is a breakdown of _figure 1_, following this 'message-thread-reply' taxonomy. 
+It is worth noting and explaining here the nomenclature/taxonomy used in the survey. First, the survey differentiates between what is called a 'message' and a 'thread', a message being anything that is posted on the list while a thread is a message that has at least one reply (a type of message that initiates a 'dialog'/thread). Every thread is a message but not all messages are threads. Second, the survey differentiates between what is dubbed a 'reply' and a thread. A reply is typically a reply to a thread, or, differently put, it is a reply to a message that makes this initial message a thread. Thus reply and thread are closely connected yet different. Needless to say that, as for the case of a thread, a reply is a message but not all messages are replies. Finally, there is single messages, ones that are neither threads or replies. The following chart is a breakdown of _figure 1_, following this 'message-thread-reply' taxonomy. 
 
 ![figure 1: Total number of (1) single messages, (2) threads and (3) replies to threads](figures/figure_1.png)
 
@@ -191,19 +203,19 @@ The survey's object of study is Nettime's archived mailing list, which is availa
 * Nettime archive (1995-2016) is publicly available in the legacy [mbox](http://www.qmail.org/man/man5/mbox.html) format at the following address: [http://nettime-survey.xyz/arch/nettime-l-2016-12-31.mbox.tar.gz](http://nettime-survey.xyz/arch/nettime-l-2016-12-31.mbox.tar.gz) (archived 31/12/2016)
 * Nettime archive (1995-2016) is publicly available in json format at the following address: [http://nettime-survey.xyz/arch/nettime-l-2016-12-31.json.gz](http://nettime-survey.xyz/arch/nettime-l-2016-12-31.json.gz) (archived 31/12/2016)
 
-Also, consistent with the ‘90’s-era origins of the Nettime list, our survey aesthetically resembles a web 1.0 report and does not allow for much interaction (static page). This was deliberate ;-)
+Also, consistent with the ‘90s’-era origins of Nettime, our survey aesthetically resembles a web 1.0 report and does not allow for much interaction (static html page). This was deliberate ;-)
 
 #Further Research
 
 To our mind the content of the posts and conversations in Nettime is, in fact, what makes this list of particular interest from the perspective of new media studies. Our survey is, of course, limited in scope and could have featured a much deeper (and perhaps more scientific) analysis of the list. To this end, here are a couple of points that may be worked on:
 
-* It seems that a thorough time analysis of the list would prompt interesting question has to do with periodizing the ‘eras’ or ‘times of Nettime’, in terms of who were the main contributing figures in different periods and how might they have clustered into specific cohorts.
+* It seems that a thorough time analysis of the list would prompt interesting question having to do with periodizing the ‘eras’ or ‘times of Nettime’, in terms of who were the main contributing figures in different periods and how might they have clustered into specific cohorts. However, given the fact that subscriptions dramatically diminished in the last decade, the vigourous times of Nettime may not signify the emergence of new cohorts (with perhaps different discourses) so much as changing dynamics within an existing one. 
 
-* Performing a discourse analysis on the content of the messages may also shed light into Nettime's periods. For instance, we know that media-arts-centered debates took place on the list at different times. Would it be possible to periodises these instances and compare their advent, for example, with the more activist-type dialogs that seemed the pervade the list in all epochs?
+* Performing a discourse analysis on the content of the messages may also shed light into Nettime's periods. For instance, we know that media-arts-centered debates took place on the list at different times (we are very interested on these). Would it be possible to periodise these instances and compare their advent, for example, with the more activist-type dialogs that seem the pervade the list in all epochs?
 
 * Dialogical clusters may be extracted and analysed to foreground the possible various 'cliques' that may, by habit, form depending on the subject at hand. Coupling this type of analysis with the previous discourse analysis could potentially produce an interesting index of the list.
 
 #Nettime Surveyors
 
-David Gauthier, Marc Tuters and Geert Lovink 
+David Gauthier and Marc Tuters. Special thanks to Geert Lovink for is insights.
 

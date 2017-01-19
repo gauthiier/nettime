@@ -104,6 +104,35 @@ class Query:
 
 		return y.to_frame('nbr-messages').astype(int)
 
+	def cohort(self, resolution='m', series=False):
+
+		freq = 'M'
+		if resolution.lower() == 'y':
+			freq = 'AS'
+		elif resolution.lower() == 'm':
+			freq = 'M'
+		else:
+			return None
+
+		self._activity()
+
+		c = self.activity.idxmax().order().to_frame('date')
+		c.index = c['date']
+
+		cohort = c.groupby([pd.TimeGrouper(freq=freq)]).size()
+
+		if freq == 'AS':
+			cohort.index = cohort.index.format(formatter=lambda x: x.strftime('%Y'))
+			cohort.index.name = 'year'
+		else:
+			cohort.index = cohort.index.format(formatter=lambda x: x.strftime('%Y-%m'))
+			cohort.index.name = 'year-month'
+
+		if series:
+			return cohort
+
+		return cohort.to_frame('first-messages').astype(int)
+
 	'''
 	content lenght
 	'''
