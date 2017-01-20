@@ -42,5 +42,9 @@
 	{	"format": "html", 
 		"command": "html_threads_ranking_year", 
 		"replace": "<--html_threads_ranking_year-->"
-	}			
+	},
+	{	"format": "text", 
+		"command": "tab_replies_ranking", 
+		"replace": "<--tab_replies_ranking-->"
+	}
 ]

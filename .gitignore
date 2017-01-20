@@ -6,3 +6,7 @@ __pycache__/
 # local work dirs
 archives/
 setenv/
+
+# txt report
+*.d
+*.txt

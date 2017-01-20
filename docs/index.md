@@ -89,11 +89,11 @@ Though this is only subscriptions. Not everyone post to the list. So what about 
 
 ![figure 0: Sum of first message instances per month](figures/figure_0.png)
 
-What we colloquially call a "cohort" resembles, to some degree, the notion of subscription rate, which ultimately speaks to the idea of Nettime's "newcomers". Though rather than consisting of the sheer amount of subscriptions over time (data which is not available from the archive), we consider when a message first appeared on the list given an email address provenance. The graph of _figure 0_ displays the sum of these "first message" instances per month (50 months quintiles). A spike in the graph could be read as the formation of a new cohort, that is, an increase in the activity of newcomers, which may signify, albeit hypothetically, that an aggregate of common interests are brought forth on the list. Nettime's Nettimes so to speak.  
+What we colloquially refer to as a "cohort" resembles, to some degree, the notion of subscription rate discussed above. Both notions speak to the idea of Nettime's "newcomers". Though rather than consisting of the sheer amount of subscriptions over time (data which is not available from the archive), we consider when a message first appeared on the list given an email address provenance. The graph of _figure 0_ displays the sum of these "first message" instances per month (50 months quintiles). A spike in the graph could be read as the formation of a new cohort, that is, an increase in the activity of newcomers, which may signify, albeit hypothetically, that an aggregate of common interests are brought forth on the list.  
 
 Theres are observable spikes that appear here and there through out the months and years in _figure 0_, however, these are short lived (max 6 months). What is more striking is the sustained activity that occurred in first two quintiles of the graph (1996-2004). This activity can be correlated with the high subscription rate described earlier. Though, unlike subscriptions, the amount of "first messages" peaked around the year 2000, rather than between 2001-2002 (66 subscriptions/month). Let us call this peak the 2000 cohort.
 
-After 2004, the number of first messages declines. As noted below, this can be attributed to the creation of nettime-ann in 2005, which rerouted announcement-type activity out off  nettime-l. Nonetheless, it can be argued that, in considering the low subscription rate in the interval 2005-2011 (6 subscriptions/month), the barely noticeable peaks of 2008 and 2011 are significant. Thus Nettime may harbor more than a single 2000 cohort, 2008 and 2011 being the other two though remarkably less momentous than the first one.
+After 2004, the number of first messages declines. As noted below, this can be attributed to the creation of nettime-ann in 2005, which rerouted announcement-type activity out off  nettime-l. Nonetheless, it can be argued, when considering the low subscription rate in the interval 2005-2011 (6 subscriptions/month), that the barely noticeable peaks of 2008 and 2011 are significant. Thus Nettime may harbor more than a single 2000 cohort, 2008 and 2011 being the other two though remarkably less momentous than the first one.
 
 
 ![figure 1: Total number of messages on Nettime](figures/figure_1.png)
@@ -108,7 +108,6 @@ In our conversations with Geert Lovink, we derived a few observations on the dat
 * The spike in 2011 may be explained by the political uprisings in the middle-east.
 
 Was Nettime's heyday only part of the first decade of its existence? Judged solely in terms of sheer amount of postings to the list (activity), it clearly can be seen to have diminished. However, in what follows, we propose different schemata, measuring the amount of dialog on the list (vigour) as well categorizing that dialog by the most prolific contributors (outspokeness).
-
 
 ##Vigour
 

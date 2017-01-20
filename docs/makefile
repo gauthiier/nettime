@@ -3,19 +3,25 @@
 ARCHIVE := arch/nettime-l_2016-12-31.json.gz
 CMDSCRIPT := command-script.json
 
-all: init index.html clean-stage
+all: init index.html txt.txt clean-stage
 
 init:
 	 @command -v pandoc > /dev/null 2>&1 || (echo 'pandoc not found... please visit -- http://johnmacfarlane.net/pandoc/installing.html' && exit 1)
 
-%.stage.md: index.md
-	python ../report.py -i $(CMDSCRIPT) -o index.stage.md -t index.md -a $(ARCHIVE)
+%.md.stage: index.md
+	python ../report.py -i $(CMDSCRIPT) -o $@ -t $< -a $(ARCHIVE)
 
-%.html: %.stage.md
+%.html: %.md.stage
 	pandoc -s --template style/template.html5 -c style/style.css -o $@ $<
 
+%.txt.stage: txt.d
+	python ../report.py -i $(CMDSCRIPT) -o $@ -t $< -a $(ARCHIVE)
+
+%.txt:  %.txt.stage
+	fold -sw 80 $< > $@
+
 clean-stage:
-	rm -rf  *.stage.md
+	rm -rf  *.stage
 
 clean:
 	rm -rf  *.hml *.txt	

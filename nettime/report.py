@@ -186,7 +186,7 @@ class Report:
 
 	def tab_replies_ranking(self, rank=10):
 		d = self.query.replies_ranking(rank=rank)
-		return format.Tab.from_dataframe(d, name_map={'nbr-replies': 'nbr. replies'})
+		return format.Tab.from_dataframe(d, name_map={'nbr_replies': 'nbr. replies'})
 
 	def tab_replies_avg_ranking(self, rank=10):
 		d = self.query.replies_avg_ranking(rank=rank)
