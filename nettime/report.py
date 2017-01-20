@@ -129,8 +129,6 @@ class Report:
 
 	def tab_msgs_threads_replies(self):
 		self.matrix_msgs_threads()
-		a = self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']].astype(int)
-		print a
 		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']].astype(int), 
 			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads'})
 
