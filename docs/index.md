@@ -215,5 +215,5 @@ To our mind the content of the posts and conversations in Nettime is, in fact, w
 
 #Nettime Surveyors
 
-David Gauthier and Marc Tuters. Special thanks to Geert Lovink for is insights.
+David Gauthier and Marc Tuters. Special thanks to Geert Lovink for his insights.
 

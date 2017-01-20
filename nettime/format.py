@@ -114,7 +114,7 @@ class Html:
 class Tab:
 
 	@staticmethod
-	def from_dataframe(data_frame, name_map={}):
+	def from_dataframe(data_frame, name_map={}, format=".0f"):
 
 		header = []
 		header.append(data_frame.index.name)
@@ -123,6 +123,6 @@ class Tab:
 				h = name_map[h]
 			header.append(h)
 
-		return tabulate(data_frame, headers=header, floatfmt=".4f")
+		return tabulate(data_frame, headers=header, floatfmt=format)
 
 

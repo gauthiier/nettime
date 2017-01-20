@@ -27,13 +27,13 @@ class Report:
 			mat = self.query.activity_overall()
 
 			# nbr threads
-			mat['nbr-threads'] = self.query.threads_overall(aggregate='count')['nbr-threads']
+			mat['nbr-threads'] = self.query.threads_overall(aggregate='count')['nbr-threads'].astype(int)
 
 			# nbr replies
-			mat['nbr-replies'] = self.query.threads_overall(aggregate='sum')['nbr-references']
+			mat['nbr-replies'] = self.query.threads_overall(aggregate='sum')['nbr-references'].astype(int)
 
 			# nbr non-replies (aka. non-threads)
-			mat['nbr-single-messages'] = mat['nbr-messages'] - mat['nbr-replies'] - mat['nbr-threads']
+			mat['nbr-single-messages'] = mat['nbr-messages'].astype(int) - mat['nbr-replies'] - mat['nbr-threads']
 
 			# avg. threads per message
 			mat['avg-thrd-per-msg'] = mat['nbr-threads'] / mat['nbr-messages']
@@ -129,20 +129,22 @@ class Report:
 
 	def tab_msgs_threads_replies(self):
 		self.matrix_msgs_threads()
-		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']], 
+		a = self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']].astype(int)
+		print a
+		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies']].astype(int), 
 			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads'})
 
 	def tab_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
 		return format.Tab.from_dataframe(self.matrix[['avg-thrd-per-msg', 'avg-rep-per-thrd']], 
-			name_map={'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+			name_map={'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'}, format=".4f")
 
 	def tab_msgs_threads_replies_avg_rep_msg_thrd(self):
 		self.matrix_msgs_threads()
 		return format.Tab.from_dataframe(self.matrix[['nbr-messages', 'nbr-threads', 'nbr-replies', 'avg-thrd-per-msg', 'avg-rep-per-thrd']], 
-			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads', 'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'})
+			name_map={'nbr-messages': 'messages', 'nbr-threads': 'threads', 'nbr-replies': 'replies in threads', 'avg-thrd-per-msg': 'avg. thread per message', 'avg-rep-per-thrd': 'avg. replies per thread'}, format=".4f")
 
-	def tab_activity_from_ranking(self, rank=5):
+	def tab_activity_from_ranking(self, rank=10):
 		d = self.query.activity_from_ranking(rank=rank)
 		return format.Tab.from_dataframe(d, name_map={'nbr-messages': 'messages'})
 
@@ -154,17 +156,17 @@ class Report:
 	#
 	def tab_threads_initiated_from_ranking(self, rank=10):
 		d = self.query.threads_initiated_from_ranking(rank=rank)
-		return format.Tab.from_dataframe(d)		
+		return format.Tab.from_dataframe(d, name_map={'nbr-initiated-threads': 'nbr. initiated threads'})		
 
 	#
 	def tab_threads_activity_threads_initiated_avg_ranking(self, rank=10):
 		d = self.query.threads_activity_threads_initiated_avg_ranking(rank=rank)
-		return format.Tab.from_dataframe(d)		
+		return format.Tab.from_dataframe(d, format=".4f")		
 
 	#
 	def tab_threads_initiated_replies_avg_ranking(self, rank=10):
 		d = self.query.threads_initiated_replies_avg_ranking(rank=rank)
-		return format.Tab.from_dataframe(d)				
+		return format.Tab.from_dataframe(d, format=".4f")				
 
 	def tab_content_length_from_ranking(self, rank=5):
 		d = self.query.activity_from_ranking(rank=rank)
@@ -186,7 +188,7 @@ class Report:
 
 	def tab_replies_ranking(self, rank=10):
 		d = self.query.replies_ranking(rank=rank)
-		return format.Tab.from_dataframe(d, name_map={'nbr_replies': 'nbr. replies'})
+		return format.Tab.from_dataframe(d, name_map={'nbr_replies': 'nbr. replies to threads'})
 
 	def tab_replies_avg_ranking(self, rank=10):
 		d = self.query.replies_avg_ranking(rank=rank)

@@ -44,7 +44,55 @@
 		"replace": "<--html_threads_ranking_year-->"
 	},
 	{	"format": "text", 
+		"command": "tab_msgs_threads_replies", 
+		"replace": "<--tab_msgs_threads_replies-->"
+	},
+	{	"format": "text", 
+		"command": "tab_avg_rep_msg_thrd", 
+		"replace": "<--tab_avg_rep_msg_thrd-->"
+	},
+	{	"format": "text", 
+		"command": "tab_activity_from_ranking", 
+		"replace": "<--tab_activity_from_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_replies_to_ranking", 
+		"replace": "<--tab_threads_replies_to_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_initiated_from_ranking", 
+		"replace": "<--tab_threads_initiated_from_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_activity_threads_initiated_avg_ranking", 
+		"replace": "<--tab_threads_activity_threads_initiated_avg_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_initiated_replies_avg_ranking", 
+		"replace": "<--tab_threads_initiated_replies_avg_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_content_length_from_ranking", 
+		"replace": "<--tab_content_length_from_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_ranking", 
+		"replace": "<--tab_threads_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_threads_ranking_year", 
+		"replace": "<--tab_threads_ranking_year-->"
+	},
+	{	"format": "text", 
+		"command": "tab_msgs_threads_replies_avg_rep_msg_thrd", 
+		"replace": "<--tab_msgs_threads_replies_avg_rep_msg_thrd-->"
+	},
+	{	"format": "text", 
 		"command": "tab_replies_ranking", 
 		"replace": "<--tab_replies_ranking-->"
+	},
+	{	"format": "text", 
+		"command": "tab_replies_avg_ranking", 
+		"replace": "<--tab_replies_avg_ranking-->"
 	}
 ]
